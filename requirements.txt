@@ -1,0 +1,7 @@
+git init
+git add .
+git commit -m "Initial Release: SERVER BING Project"
+git branch -M main
+git remote add origin https://github.com/daya969/server_discord_bing.git
+git push -u origin main
+
