@@ -5,7 +5,7 @@ try:
 except ImportError:
     R, G, B, W, Y = "\033[31m", "\033[32m", "\033[34m", "\033[37m", "\033[33m"
     def clear_screen(): os.system('clear' if os.name == 'posix' else 'cls')
-    def show_footer(): print(f"{B}--- SB-PROJECT ---{W}")
+    def show_footer(): pass
 
 def main_menu():
     while True:
@@ -29,14 +29,14 @@ def main_menu():
             choice = input(f"\n{R}SB-MASTER {G}>> {W}")
 
             if choice == "01":
-                if os.path.exists("server_bing.py"):
-                    subprocess.run(["python3", "server_bing.py"])
+                print(f"\n{Y}[*] Initiating Lag Protocol...{W}")
+                subprocess.run(["python3", "server_bing.py"])
             elif choice == "02":
-                if os.path.exists("scanner.py"):
-                    subprocess.run(["python3", "scanner.py"])
+                print(f"\n{Y}[*] Scanning Target...{W}")
+                subprocess.run(["python3", "scanner.py"])
             elif choice == "03":
                 os.system("history -c && rm -f ~/.bash_history && clear")
-                print(f"\n{G}[+] Logs Purged Successfully!{W}")
+                print(f"\n{G}[+] Logs Purged.{W}")
                 input("\nPress Enter...")
             elif choice == "00":
                 sys.exit()
