@@ -28,17 +28,22 @@ def main_menu():
             
             choice = input(f"\n{R}SB-MASTER {G}>> {W}")
 
-            if choice == "01":
-                print(f"\n{Y}[*] Initiating Lag Protocol...{W}")
-                subprocess.run(["python3", "server_bing.py"])
-            elif choice == "02":
-                print(f"\n{Y}[*] Scanning Target...{W}")
-                subprocess.run(["python3", "scanner.py"])
-            elif choice == "03":
+            if choice == "1" or choice == "01":
+                if os.path.exists("server_bing.py"):
+                    subprocess.run(["python3", "server_bing.py"])
+                else:
+                    print(f"\n{R}[!] Error: server_bing.py not found.{W}")
+                    os.system("sleep 2")
+            elif choice == "2" or choice == "02":
+                if os.path.exists("scanner.py"):
+                    subprocess.run(["python3", "scanner.py"])
+                else:
+                    print(f"\n{R}[!] Error: scanner.py not found.{W}")
+                    os.system("sleep 2")
+            elif choice == "3" or choice == "03":
                 os.system("history -c && rm -f ~/.bash_history && clear")
-                print(f"\n{G}[+] Logs Purged.{W}")
-                input("\nPress Enter...")
-            elif choice == "00":
+                input("\n[+] Logs Purged. Press Enter...")
+            elif choice == "0" or choice == "00":
                 sys.exit()
         except KeyboardInterrupt:
             sys.exit()
